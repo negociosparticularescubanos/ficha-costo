@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ficha de Costo · Consultoría y creación de negocios en Cuba</title>
+<meta name="description" content="Ficha de costo, factura e informe para servicios de consultoría y creación de negocios: TCP, MIPYME, PDL y demás actores económicos en Cuba.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23102a43'/%3E%3Ctext x='16' y='22' font-size='17' text-anchor='middle' fill='%23c9a227' font-family='Georgia'%3EF%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+<header class="masthead">
+  <div class="masthead-in">
+    <div>
+      <div class="brand">Consultoría · Creación de negocios</div>
+      <h1>Ficha de costo, factura e informe</h1>
+      <p>Servicios de consultoría y creación de negocios particulares, TCP, MIPYME, PDL y demás actores económicos. Un solo dato, tres documentos: la ficha, la factura y el informe que convence al cliente.</p>
+    </div>
+    <div class="mast-actions">
+      <button class="btn btn-ghost" id="btnNueva" type="button">Nueva ficha</button>
+      <span class="note" style="color:#cbd5e1;align-self:center">Guardado automático en este equipo</span>
+    </div>
+  </div>
+</header>
+
+<div class="wrap">
+  <nav class="tabs no-print" role="tablist" aria-label="Documentos">
+    <button class="tab-btn" role="tab" data-tab="ficha" aria-selected="true" type="button">1 · Ficha de costo</button>
+    <button class="tab-btn" role="tab" data-tab="factura" aria-selected="false" type="button">2 · Factura</button>
+    <button class="tab-btn" role="tab" data-tab="informe" aria-selected="false" type="button">3 · Informe para el cliente</button>
+  </nav>
+
+  <!-- ============ PESTAÑA 1 · FICHA ============ -->
+  <section class="tab-panel activo" id="panel-ficha" role="tabpanel">
+    <div class="card">
+      <h2><span class="sec-num">1 ·</span> Datos del encargo</h2>
+      <p class="note">Cada dato se escribe una sola vez y aparece en la ficha, la factura y el informe. Lo que falte quedará marcado como [A COMPLETAR] en los documentos: nunca se inventa.</p>
+      <div class="grid-2">
+        <div>
+          <label class="lbl" for="emisorNombre">Quien presta el servicio (emisor)</label>
+          <input class="inp" id="emisorNombre" type="text" placeholder="Nombre del negocio o consultora">
+        </div>
+        <div>
+          <label class="lbl" for="emisorDetalle">Datos del emisor</label>
+          <input class="inp" id="emisorDetalle" type="text" placeholder="Dirección, teléfono, correo…">
+        </div>
+        <div>
+          <label class="lbl" for="clienteNombre">Cliente</label>
+          <input class="inp" id="clienteNombre" type="text" placeholder="Nombre del cliente o del proyecto">
+        </div>
+        <div>
+          <label class="lbl" for="clienteActor">Forma de gestión / actor económico</label>
+          <select class="inp" id="clienteActor"></select>
+        </div>
+        <div>
+          <label class="lbl" for="clienteContacto">Contacto del cliente</label>
+          <input class="inp" id="clienteContacto" type="text" placeholder="Teléfono, correo…">
+        </div>
+        <div>
+          <label class="lbl" for="proyecto">Proyecto o negocio</label>
+          <input class="inp" id="proyecto" type="text" placeholder="Ej.: Cafetería El Portal, PDL AgroZapata…">
+        </div>
+      </div>
+      <div class="grid-4" style="margin-top:14px">
+        <div>
+          <label class="lbl" for="numero">Número de ficha / factura</label>
+          <input class="inp" id="numero" type="text" placeholder="Ej.: FC-2026-001">
+        </div>
+        <div>
+          <label class="lbl" for="fecha">Fecha</label>
+          <input class="inp" id="fecha" type="date">
+        </div>
+        <div>
+          <label class="lbl" for="validez">Validez de la propuesta (días)</label>
+          <input class="inp inp-num" id="validez" type="number" min="1" step="1" value="30">
+        </div>
+        <div>
+          <label class="lbl">Moneda</label>
+          <input class="inp" type="text" value="CUP (pesos cubanos)" disabled>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span class="sec-num">2 ·</span> Servicios contratados</h2>
+      <p class="note">Busque en el catálogo y añada los servicios. Cada uno trae su explicación paso a paso, que aparecerá en el informe para el cliente. Todo precio es editable.</p>
+      <blockquote class="guia">El catálogo cubre consultoría, estudios de factibilidad, expedientes PDL, creación de TCP y MIPYME, finanzas, banca, gestión y soluciones digitales. Si un servicio no está, añada una línea libre y escriba su explicación en el detalle.</blockquote>
+      <div class="catalogo-busca no-print">
+        <input class="inp" id="buscaServicio" type="text" placeholder="Buscar servicio: factibilidad, PDL, MIPYME, crédito, web…" autocomplete="off">
+      </div>
+      <div id="chipsCat" class="no-print" style="display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px"></div>
+      <div id="listaCatalogo" class="no-print"></div>
+      <h3 style="font-size:15px;margin:18px 0 8px">Líneas de la ficha</h3>
+      <div class="tabla-scroll">
+        <table class="tabla">
+          <thead><tr><th>Servicio</th><th class="num" style="width:76px">Cant.</th><th class="num" style="width:130px">Precio unit. (CUP)</th><th class="num" style="width:130px">Importe</th><th class="num" style="width:70px">Horas</th><th style="width:36px"></th></tr></thead>
+          <tbody id="tbodyLineas"></tbody>
+        </table>
+      </div>
+      <button class="btn btn-light btn-sm no-print" id="btnAddLinea" type="button" style="margin-top:10px">+ Añadir línea libre</button>
+    </div>
+
+    <div class="card">
+      <h2><span class="sec-num">3 ·</span> Gastos directos del encargo</h2>
+      <p class="note">Transporte, impresión, mensajería, pagos a terceros por cuenta del cliente. Se suman al total y aparecen en la factura como gastos directos.</p>
+      <div class="tabla-scroll">
+        <table class="tabla" style="min-width:420px">
+          <thead><tr><th>Concepto</th><th class="num" style="width:170px">Monto (CUP)</th><th style="width:36px"></th></tr></thead>
+          <tbody id="tbodyGastos"></tbody>
+        </table>
+      </div>
+      <button class="btn btn-light btn-sm no-print" id="btnAddGasto" type="button" style="margin-top:10px">+ Añadir gasto</button>
+    </div>
+
+    <div class="card panel-interno">
+      <h2><span class="sec-num">4 ·</span> Análisis interno <span class="badge badge-interno">Uso interno · no sale en la factura ni en el informe</span></h2>
+      <p class="note">Costo de su hora profesional, gastos indirectos y descuento. Con esto la ficha le muestra el margen real del encargo antes de presentar el precio.</p>
+      <div class="grid-3">
+        <div>
+          <label class="lbl" for="costoHora">Costo de la hora profesional (CUP)</label>
+          <input class="inp inp-num" id="costoHora" type="number" min="0" step="any" value="350">
+        </div>
+        <div>
+          <label class="lbl" for="indirectosPct">Gastos indirectos (% sobre el costo directo)</label>
+          <input class="inp inp-num" id="indirectosPct" type="number" min="0" step="any" value="15">
+        </div>
+        <div>
+          <label class="lbl" for="descuento">Descuento al cliente (%)</label>
+          <input class="inp inp-num" id="descuento" type="number" min="0" step="any" value="0">
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span class="sec-num">5 ·</span> Resumen</h2>
+      <div class="resumen">
+        <div>
+          <div class="res-line"><span>Servicios</span><b id="rSubServicios">0,00</b></div>
+          <div class="res-line"><span>Gastos directos</span><b id="rGastos">0,00</b></div>
+          <div class="res-line"><span>Subtotal</span><b id="rSubtotal">0,00</b></div>
+          <div class="res-line"><span>Descuento</span><b id="rDescuento">0,00</b></div>
+          <div class="res-line"><span>Horas profesionales estimadas</span><b id="rHoras">0</b></div>
+        </div>
+        <div>
+          <div class="res-line"><span>Costo de horas</span><b id="rCostoHoras">0,00</b></div>
+          <div class="res-line"><span>Costo total interno</span><b id="rCostoTotal">0,00</b></div>
+          <div class="res-line"><span>Margen estimado</span><b id="rMargen">0,00</b></div>
+          <div class="res-line"><span>Margen sobre el total</span><b id="rMargenPct">0 %</b></div>
+        </div>
+      </div>
+      <div class="res-total" style="margin-top:14px">
+        <div class="lbl">Total a pagar por el cliente</div>
+        <div class="monto"><span id="rTotal">0,00</span> CUP</div>
+        <div class="sub" id="rTotalNota"></div>
+      </div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px" class="no-print">
+        <button class="btn btn-navy" id="btnPrintFicha" type="button">Imprimir ficha de costo</button>
+        <button class="btn btn-light" id="btnIrFactura" type="button">Ver la factura →</button>
+        <button class="btn btn-light" id="btnIrInforme" type="button">Ver el informe →</button>
+      </div>
+    </div>
+
+    <!-- Documento imprimible de la ficha (solo visible al imprimir) -->
+    <div id="printFicha" class="print-only"></div>
+  </section>
+
+  <!-- ============ PESTAÑA 2 · FACTURA ============ -->
+  <section class="tab-panel" id="panel-factura" role="tabpanel">
+    <div class="card no-print">
+      <h2><span class="sec-num">2 ·</span> Factura</h2>
+      <p class="note">Se genera sola con los datos de la ficha. Ajuste aquí la forma de pago y las notas; el resto viene de la pestaña 1.</p>
+      <div class="grid-2">
+        <div>
+          <label class="lbl" for="formaPago">Forma de pago</label>
+          <input class="inp" id="formaPago" type="text" placeholder="Ej.: 50% al inicio y 50% a la entrega">
+        </div>
+        <div>
+          <label class="lbl" for="notasFactura">Notas de la factura</label>
+          <input class="inp" id="notasFactura" type="text" placeholder="Ej.: Pago por transferencia a la cuenta del negocio">
+        </div>
+      </div>
+    </div>
+    <div class="doc-actions no-print">
+      <button class="btn btn-navy" id="btnPrintFactura" type="button">Imprimir / guardar factura en PDF</button>
+    </div>
+    <div class="paper" id="docFactura"></div>
+  </section>
+
+  <!-- ============ PESTAÑA 3 · INFORME ============ -->
+  <section class="tab-panel" id="panel-informe" role="tabpanel">
+    <div class="card no-print">
+      <h2><span class="sec-num">3 ·</span> Informe para el cliente</h2>
+      <p class="note">El informe explica cada servicio paso a paso, con sus entregables y su base normativa, para que el cliente entienda el trabajo que respalda el precio. Edite el mensaje final a su gusto.</p>
+      <label class="lbl" for="notaFinal">Mensaje final al cliente</label>
+      <textarea class="inp" id="notaFinal" rows="4"></textarea>
+    </div>
+    <div class="doc-actions no-print">
+      <button class="btn btn-navy" id="btnPrintInforme" type="button">Imprimir / guardar informe en PDF</button>
+    </div>
+    <div class="paper" id="docInforme"></div>
+  </section>
+
+  <footer class="pie">
+    Ficha de costo · Consultoría y creación de negocios en Cuba · Los precios del catálogo son bases editables. Los datos se guardan solo en este equipo.
+  </footer>
+</div>
+
+<script src="datos.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
