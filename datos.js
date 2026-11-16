@@ -31,7 +31,11 @@ const CATEGORIAS = [
   { id: 'formaliza', nombre: 'Creación y formalización' },
   { id: 'finanzas', nombre: 'Finanzas y banca' },
   { id: 'gestion', nombre: 'Gestión y estrategia' },
-  { id: 'digital', nombre: 'Soluciones digitales' }
+  { id: 'digital', nombre: 'Soluciones digitales' },
+  { id: 'marca', nombre: 'Marca y comunicación' },
+  { id: 'eventos', nombre: 'Eventos y contactos' },
+  { id: 'micro', nombre: 'Micro-servicios' },
+  { id: 'legal', nombre: 'Apoyo legal' }
 ];
 
 /* ---------- Líneas y programas de la EDM (semilla: Ciénaga de Zapata
@@ -109,10 +113,11 @@ const SERVICIOS = [
       'Recogida de datos oficiales: población, empleo, visitantes y producción, desde la ONEI y la EDM del municipio.',
       'Mapeo de la oferta existente: competidores directos e indirectos, precios y saturación del mercado local.',
       'Estimación de la demanda insatisfecha y segmentación: población, turismo, sector estatal y exportación.',
+      'Lectura de tendencias y del contexto: qué está cambiando en el sector y en el país y cómo afecta al mercado local.',
       'Estrategia de precios y canales de comercialización recomendados, con la ficha de costo como base.',
       'Informe final con conclusiones y recomendaciones de entrada al mercado.'
     ],
-    entregables: ['Informe del estudio de mercado con datos citados', 'Cálculo de demanda insatisfecha por segmento', 'Recomendación de precios y canales'],
+    entregables: ['Informe del estudio de mercado con datos citados', 'Cálculo de demanda insatisfecha por segmento', 'Recomendación de precios y canales', 'Apartado de tendencias y contexto dentro del informe.'],
     base: 'Fuentes obligatorias: ONEI (anuarios nacional y territorial) y Estrategia de Desarrollo Municipal.' },
   { id: 'eval-v4', categoria: 'estudios', nombre: 'Evaluación con Metodología v4.0 y Ficha Única',
     unidad: 'evaluación', precio: 15000, horas: 12,
@@ -206,7 +211,7 @@ const SERVICIOS = [
       'Formación del precio con el margen objetivo y comparación con el mercado.',
       'Entrega de la ficha editable y explicación de cómo actualizarla cuando cambien los precios.'
     ],
-    entregables: ['Ficha de costo por producto o servicio', 'Precio recomendado con su justificación', 'Ficha editable para actualizar precios'],
+    entregables: ['Ficha de costo por producto o servicio', 'Precio recomendado con su justificación', 'Ficha editable para actualizar precios', 'Cuadro de comparación del precio calculado con los precios de la competencia local, con la posición recomendada (igual, por debajo o por encima).'],
     base: 'Formación de precios desde la ficha de costo; listados oficiales de precios (MFP).' },
   { id: 'flujo-caja', categoria: 'finanzas', nombre: 'Flujo de caja y proyecciones financieras (5 años)',
     unidad: 'proyecto', precio: 16000, horas: 16,
@@ -218,7 +223,7 @@ const SERVICIOS = [
       'Flujo de caja económico y financiero, con el período de recuperación.',
       'Revisión conjunta y entrega del modelo editable con su guía de uso.'
     ],
-    entregables: ['Proyección financiera a 5 años', 'Estado de resultados y flujo de caja', 'Modelo editable con supuestos declarados'],
+    entregables: ['Proyección financiera a 5 años', 'Estado de resultados y flujo de caja', 'Modelo editable con supuestos declarados', 'Primera revisión trimestral del modelo incluida: una sesión para actualizar los supuestos con los números reales.'],
     base: 'Guías metodológicas del MEP (Resolución 70/2026), capítulos 5 y 6; parámetros BCC y ONAT vigentes.' },
   { id: 'credito', categoria: 'finanzas', nombre: 'Expediente de crédito bancario (BANDEC / BPA)',
     unidad: 'expediente', precio: 14000, horas: 14,
@@ -240,7 +245,8 @@ const SERVICIOS = [
       'Configuración de la aplicación Finanzas: cuentas bancarias, clientes, proveedores y centros de costo.',
       'Carga de saldos iniciales y de los primeros movimientos, con conciliación bancaria.',
       'Capacitación práctica al responsable: registrar, consultar y cerrar el mes.',
-      'Entrega de la guía de cierre mensual y de los reportes que debe revisar.'
+      'Entrega de la guía de cierre mensual y de los reportes que debe revisar.',
+      'Explicación del servicio de contabilidad continua mensual (servicio aparte) y entrega de su propuesta con precio.'
     ],
     entregables: ['Plan de cuentas configurado', 'Aplicación Finanzas lista con saldos iniciales', 'Guía de cierre mensual y capacitación práctica'],
     base: 'Normas contables empresariales; Resolución 202/2026 MFP cuando aplica a PDL.' },
@@ -253,7 +259,7 @@ const SERVICIOS = [
       'Matriz de riesgos con medidas concretas de mitigación y su costo.',
       'Recomendaciones de decisión según la resistencia del proyecto.'
     ],
-    entregables: ['Análisis de sensibilidad en tres escenarios', 'Matriz de riesgos con mitigación', 'Recomendaciones de decisión'],
+    entregables: ['Análisis de sensibilidad en tres escenarios', 'Matriz de riesgos con mitigación', 'Recomendaciones de decisión', 'Nota de contexto: qué hechos del entorno (normas, precios clave, competencia) vigilar durante la ejecución del proyecto.'],
     base: 'Guías metodológicas del MEP (Resolución 70/2026), capítulo 6; variaciones habituales del contexto cubano.' },
   { id: 'estrategia', categoria: 'gestion', nombre: 'Estrategia de desarrollo y plan de acción anual',
     unidad: 'proyecto', precio: 20000, horas: 18,
@@ -267,11 +273,12 @@ const SERVICIOS = [
       'Programas de la estrategia, con su alcance, sus responsables y su cartera de proyectos.',
       'Políticas públicas locales por línea: objetivos, marco jurídico, lineamientos, metas por plazo, acciones, resultados esperados, responsables y control.',
       'Ciclo de gestión, seguimiento y actualización: tablero de indicadores con línea base, metas intermedias y meta final, y evaluaciones anuales.',
+      'Sesión de validación de metas e indicadores con el gobierno municipal antes de cerrar el documento.',
       'Articulación con el Modelo de Ordenamiento Ambiental: zonificación, usos compatibles con la conservación y Tarea Vida.',
       'Participación y gobernanza: CAM, AMPP, consejos populares, entidades y población en la elaboración, implementación y evaluación.',
       'Disposiciones finales: presentación al CAM, elevación a la AMPP y mecanismo de revisión permanente.'
     ],
-    entregables: ['Documento de estrategia con los 11 acápites oficiales', 'Plan de acción anual con presupuesto', 'Tablero de indicadores y evaluación'],
+    entregables: ['Documento de estrategia con los 11 acápites oficiales', 'Plan de acción anual con presupuesto', 'Tablero de indicadores y evaluación', 'Resumen ejecutivo de 2 páginas para directivos.'],
     base: 'Decreto 174/2026 y Resolución 70/2026 del MEP (guías metodológicas para las estrategias de desarrollo municipal).' },
   { id: 'eval-semestral', categoria: 'gestion', nombre: 'Evaluación semestral de PDL ante el CAM',
     unidad: 'evaluación', precio: 12000, horas: 10,
@@ -313,6 +320,7 @@ const SERVICIOS = [
       'Definición de contenidos: servicios, precios, historia y contacto del negocio.',
       'Diseño adaptado a móvil y PC, con la imagen del negocio.',
       'Construcción y publicación de la página, con formularios de contacto.',
+      'Optimización para buscadores y para compartir en redes: título, descripción e imagen de portada de la página.',
       'Entrega con guía de actualización y acompañamiento inicial.'
     ],
     entregables: ['Página web publicada', 'Diseño adaptado a móvil y PC', 'Guía de actualización'],
@@ -335,10 +343,357 @@ const SERVICIOS = [
       'Diagnóstico de la presencia actual y de la competencia.',
       'Definición de imagen, mensajes y canales prioritarios.',
       'Configuración de perfiles y plantillas de publicación.',
+      'Diseño de las piezas gráficas iniciales para redes y publicidad, con plantillas editables con la imagen del negocio.',
       'Calendario inicial de publicaciones y guía de mantenimiento.'
     ],
-    entregables: ['Perfiles configurados', 'Plantillas de publicación', 'Calendario inicial y guía'],
-    base: 'Canales digitales habituales en Cuba; contenido en español.' }
+    entregables: ['Perfiles configurados', 'Plantillas de publicación', 'Calendario inicial y guía', 'Paquete inicial de piezas gráficas (plantillas editables).', 'Guía de mensajes: qué decir en cada canal y cómo responder a los clientes.'],
+    base: 'Canales digitales habituales en Cuba; contenido en español.' },
+  { id: 'evento-llave-mano', categoria: 'eventos', nombre: 'Evento corporativo llave en mano',
+    unidad: 'evento', precio: 30000, horas: 24,
+    resumen: 'Evento completo organizado de principio a fin: lanzamiento, rueda de negocios, taller, aniversario o encuentro entre empresas, con programa, logística y cierre.',
+    pasos: [
+      'Definición del objetivo, el público, la fecha y el formato del evento con el cliente.',
+      'Programa del evento: agenda, intervenciones, tiempos y responsables.',
+      'Coordinación de la logística: local, montaje, sonido, materiales y convocatoria de invitados.',
+      'Ejecución el día del evento: recepción, orden del programa y atención a los participantes.',
+      'Cierre con informe: asistencia, resultados, fotos y lecciones para el próximo evento.'
+    ],
+    entregables: ['Programa y agenda del evento', 'Evento ejecutado con su logística coordinada', 'Informe de cierre con asistencia y resultados'],
+    base: 'Organización por objetivos: programa, logística, ejecución y cierre con informe. Los gastos de local, comida y terceros no están incluidos en el precio.' },
+  { id: 'diag-comunicacion', categoria: 'marca', nombre: 'Diagnóstico de comunicación e imagen',
+    unidad: 'diagnóstico', precio: 10000, horas: 8,
+    resumen: 'Revisión completa de cómo comunica el negocio: mensajes, canales, imagen y lo que piensan los clientes, con los problemas ordenados por importancia.',
+    pasos: [
+      'Revisión de todos los mensajes y canales actuales: redes, carteles, papelería, atención al cliente y página web si existe.',
+      'Entrevistas cortas con el equipo y con clientes para saber cómo se percibe el negocio.',
+      'Diagnóstico de imagen y marca: qué se entiende, qué confunde y qué falta.',
+      'Informe con los problemas ordenados por importancia y las correcciones recomendadas.'
+    ],
+    entregables: ['Informe de diagnóstico de comunicación', 'Lista de problemas ordenados por importancia', 'Recomendaciones de corrección inmediata'],
+    base: 'Método de diagnóstico: revisión de mensajes y canales, entrevistas y análisis de la percepción de los clientes.' },
+  { id: 'estrategia-comunicacion', categoria: 'marca', nombre: 'Estrategia y plan de comunicación',
+    unidad: 'proyecto', precio: 18000, horas: 16,
+    resumen: 'Plan de comunicación para todo el año: qué decir, a quién, por qué canal y cuándo, con el posicionamiento de la marca y el plan para responder ante una crisis.',
+    pasos: [
+      'Definición de públicos, mensajes clave y tono: cómo habla el negocio en cada canal.',
+      'Posicionamiento: qué lugar debe ocupar la marca en la mente del cliente y cómo ganar visibilidad frente a la competencia.',
+      'Plan de canales y calendario anual: qué se comunica cada mes y con qué objetivo.',
+      'Plan de respuesta ante crisis: quién habla, qué se dice y en qué orden cuando surge un problema público.',
+      'Indicadores de seguimiento: cómo saber si la comunicación está funcionando.'
+    ],
+    entregables: ['Documento de estrategia de comunicación', 'Calendario anual de comunicación', 'Plan de respuesta ante crisis'],
+    base: 'Método de planificación de comunicación: públicos, mensajes, canales, calendario y medición.' },
+  { id: 'campana-comunicacion', categoria: 'marca', nombre: 'Campaña de comunicación y contenido',
+    unidad: 'campaña', precio: 15000, horas: 14,
+    resumen: 'Campaña completa para un objetivo concreto: lanzar un producto, atraer clientes o dar a conocer el negocio, con contenido listo para publicar y seguimiento de resultados.',
+    pasos: [
+      'Definición del objetivo de la campaña, el público y el mensaje central.',
+      'Plan de contenido: textos, piezas gráficas y calendario de publicación, incluida la comunicación para ferias y eventos cuando aplica.',
+      'Producción del contenido y preparación de los canales.',
+      'Lanzamiento y seguimiento: publicación, respuesta a los interesados y ajuste sobre la marcha.',
+      'Informe de resultados: alcance, respuestas y qué repetir en la próxima campaña.'
+    ],
+    entregables: ['Plan y calendario de la campaña', 'Contenido listo para publicar (textos y piezas)', 'Informe de resultados de la campaña'],
+    base: 'Método de campaña: objetivo, mensaje, contenido, lanzamiento y medición de resultados.' },
+  { id: 'marca-completa', categoria: 'marca', nombre: 'Sistema completo de marca',
+    unidad: 'proyecto', precio: 25000, horas: 20,
+    resumen: 'La marca entera del negocio: nombre comercial, lema, imagen, manual de identidad, papelería y piezas promocionales, lista para usar en todo lo que el negocio muestra.',
+    pasos: [
+      'Definición del nombre comercial y del lema, con revisión de que no estén en uso por otro negocio del territorio.',
+      'Diseño de la imagen: logo, colores, letras y estilo de las piezas.',
+      'Manual de identidad sencillo: cómo usar la marca en cada material, qué se permite y qué no.',
+      'Papelería y piezas promocionales: tarjetas, membrete, volantes y piezas para redes.',
+      'Señalética básica: carteles y letreros del local, con su manual de uso, cuando el negocio tiene local abierto al público.'
+    ],
+    entregables: ['Nombre comercial y lema definidos', 'Manual de identidad con logo, colores y reglas de uso', 'Papelería, piezas promocionales y señalética básica'],
+    base: 'Método de construcción de marca: nombre, imagen, manual y aplicaciones. El registro legal de la marca es un servicio aparte.' },
+  { id: 'marca-producto', categoria: 'marca', nombre: 'Marca de un producto',
+    unidad: 'producto', precio: 12000, horas: 10,
+    resumen: 'Marca propia para un producto: nombre, imagen, etiqueta y presentación, para que el producto se reconozca y se venda solo en el estante o en la foto.',
+    pasos: [
+      'Definición del nombre del producto y de su promesa: qué lo hace distinto.',
+      'Diseño de la imagen del producto: logo, colores y estilo.',
+      'Diseño de etiqueta y presentación, con la información que el producto debe mostrar.',
+      'Piezas de lanzamiento: fotos y textos para redes y puntos de venta.'
+    ],
+    entregables: ['Nombre e imagen del producto', 'Etiqueta y presentación diseñadas', 'Piezas de lanzamiento para redes y venta'],
+    base: 'Método de marca de producto: nombre, imagen, etiqueta y lanzamiento.' },
+  { id: 'informe-contexto', categoria: 'estudios', nombre: 'Informe de contexto y tendencias',
+    unidad: 'informe', precio: 15000, horas: 12,
+    resumen: 'Informe sobre un tema que el cliente necesita entender: contexto, tendencias, información pública recogida y qué significa para su negocio o su proyecto.',
+    pasos: [
+      'Definición del tema y de las preguntas que el informe debe responder.',
+      'Recogida de información pública: normas, cifras oficiales, prensa y fuentes del sector, todas citadas.',
+      'Análisis de tendencias: qué está cambiando y hacia dónde va el sector.',
+      'Escenarios: qué puede pasar y cómo afecta al negocio del cliente.',
+      'Informe final con conclusiones y recomendaciones claras.'
+    ],
+    entregables: ['Informe de contexto y tendencias con fuentes citadas', 'Apartado de escenarios y riesgos', 'Recomendaciones para la decisión del cliente'],
+    base: 'Fuentes obligatorias: ONEI (anuarios nacional y territorial) y Estrategia de Desarrollo Municipal; toda la información pública va citada.' },
+  { id: 'estudio-clima', categoria: 'estudios', nombre: 'Estudio de clima empresarial con encuestas',
+    unidad: 'estudio', precio: 20000, horas: 18,
+    resumen: 'Encuesta a los negocios de un territorio o sector para medir cómo está el ambiente para hacer negocios: ventas, obstáculos, expectativas y necesidades, con resultados en cifras generales.',
+    pasos: [
+      'Diseño de la encuesta: preguntas claras sobre ventas, obstáculos, costos y expectativas.',
+      'Aplicación de la encuesta a negocios del territorio o del sector, en persona o en línea.',
+      'Procesamiento de respuestas y cálculo de resultados en cifras generales.',
+      'Informe con hallazgos, comparaciones y recomendaciones para el territorio o el sector.'
+    ],
+    entregables: ['Encuesta diseñada y aplicada', 'Informe de clima empresarial con cifras generales', 'Recomendaciones a partir de los resultados'],
+    base: 'Método de encuesta: cuestionario, muestra del territorio o sector, y resultados publicados solo en cifras generales, sin datos de un negocio en particular.' },
+  { id: 'memoria-anual', categoria: 'estudios', nombre: 'Memoria anual de resultados',
+    unidad: 'documento', precio: 12000, horas: 10,
+    resumen: 'Documento anual que cuenta lo que el negocio o el proyecto logró en el año: cifras, hechos, proyectos y planes, listo para socios, autoridades o clientes.',
+    pasos: [
+      'Recogida de la información del año: cifras, hechos, proyectos y fotos.',
+      'Redacción de la memoria: resultados, actividades, equipo y planes para el año siguiente.',
+      'Revisión de cifras con el cliente: nada se publica sin comprobar.',
+      'Diseño y entrega del documento final, listo para imprimir o compartir.'
+    ],
+    entregables: ['Memoria anual redactada y diseñada', 'Cuadro de cifras del año verificadas', 'Versión lista para imprimir y compartir'],
+    base: 'Estructura de memoria anual: resultados, cifras, hechos y planes; los datos son los del propio negocio, verificados con el cliente.' },
+  { id: 'comercio-exterior', categoria: 'gestion', nombre: 'Primeros pasos para exportar servicios',
+    unidad: 'proyecto', precio: 18000, horas: 16,
+    resumen: 'Servicio de primeros pasos para vender servicios fuera de Cuba: qué se puede exportar, qué pide el marco vigente, qué documentos hacen falta y por dónde empezar.',
+    pasos: [
+      'Revisión de los servicios del negocio que se pueden exportar y de su mercado posible.',
+      'Mapa de requisitos: qué pide el marco vigente, qué documentos hacen falta y qué entidad interviene.',
+      'Estrategia de entrada: clientes objetivo, canales, precios y posicionamiento internacional.',
+      'Plan de acción con pasos, responsables y plazos para la primera exportación.'
+    ],
+    entregables: ['Mapa de requisitos y documentos para exportar', 'Estrategia de entrada a mercados', 'Plan de acción para la primera exportación'],
+    base: '[A COMPLETAR: base normativa]' },
+  { id: 'mapeo-sectorial', categoria: 'estudios', nombre: 'Mapeo territorial de actores económicos',
+    unidad: 'estudio', precio: 25000, horas: 20,
+    resumen: 'Mapa vivo de los negocios y actores de un sector o un municipio: encuesta abierta, base de datos y un informe con las cifras generales del sector, para decidir con datos propios.',
+    pasos: [
+      'Diseño de la encuesta abierta: quiénes son los actores, qué hacen, a quién venden y qué necesitan.',
+      'Convocatoria y recogida de respuestas, en línea y en persona.',
+      'Base de datos del sector: actores ordenados por eslabón de la cadena (producción, transformación, logística, comercialización, exportación).',
+      'Informe con cifras generales: tamaño del sector, ventas por destino, necesidades y oportunidades de conexión.',
+      'Entrega de la base y del informe, con la guía para mantener el mapa actualizado.'
+    ],
+    entregables: ['Encuesta abierta aplicada', 'Base de datos del sector ordenada por eslabón', 'Informe con cifras generales y oportunidades'],
+    base: 'Método de mapeo: encuesta abierta, base de datos propia y publicación solo de cifras generales, nunca de datos de un negocio en particular.' },
+  { id: 'micro-revision-doc', categoria: 'micro', nombre: 'Revisión de un documento',
+    unidad: 'documento', precio: 2500, horas: 2,
+    resumen: 'Revisión experta de un documento que el cliente ya tiene: se marcan los errores, los vacíos y lo que falta, con las correcciones recomendadas por escrito.',
+    pasos: [
+      'Lectura completa del documento contra la norma o el modelo que debe cumplir.',
+      'Marcado de errores, vacíos y riesgos, punto por punto.',
+      'Entrega de las observaciones por escrito con las correcciones recomendadas.'
+    ],
+    entregables: ['Documento revisado con observaciones marcadas', 'Lista de correcciones recomendadas'],
+    base: 'Revisión contra la norma o el modelo que el documento debe cumplir; las observaciones van por escrito.' },
+  { id: 'micro-ficha-producto', categoria: 'micro', nombre: 'Ficha de costo de un solo producto',
+    unidad: 'producto', precio: 2000, horas: 2,
+    resumen: 'Ficha de costo de un solo producto o servicio: insumos, mano de obra y gastos, con el precio calculado y el margen, en una ficha editable.',
+    pasos: [
+      'Levantamiento de insumos, cantidades y precios reales de compra del producto.',
+      'Cálculo de mano de obra y gastos indirectos por unidad.',
+      'Construcción de la ficha con merma, costo unitario y precio recomendado.'
+    ],
+    entregables: ['Ficha de costo del producto', 'Precio recomendado con su justificación'],
+    base: 'Formación de precios desde la ficha de costo; listados oficiales de precios (MFP).' },
+  { id: 'micro-logo', categoria: 'micro', nombre: 'Logo sencillo',
+    unidad: 'pieza', precio: 3000, horas: 3,
+    resumen: 'Logo sencillo para el negocio: una propuesta limpia y usable en tarjetas, redes y carteles, entregada en los formatos que el cliente necesita.',
+    pasos: [
+      'Entrevista breve: nombre, actividad y estilo que el cliente quiere.',
+      'Diseño de la propuesta de logo con sus colores.',
+      'Ajuste con el cliente y entrega en los formatos de uso habitual.'
+    ],
+    entregables: ['Logo en los formatos de uso habitual', 'Guía breve de colores y uso'],
+    base: 'Diseño de identidad visual básica; el manual de identidad completo es un servicio aparte.' },
+  { id: 'micro-papeleria', categoria: 'micro', nombre: 'Papelería básica del negocio',
+    unidad: 'paquete', precio: 3500, horas: 3,
+    resumen: 'Paquete de papelería básica con la imagen del negocio: tarjetas de presentación, membrete y volante sencillo, listos para imprimir.',
+    pasos: [
+      'Definición de los datos y del estilo de las piezas.',
+      'Diseño de tarjetas, membrete y volante con la imagen del negocio.',
+      'Entrega de los archivos listos para imprimir.'
+    ],
+    entregables: ['Tarjetas de presentación', 'Membrete y volante listos para imprimir'],
+    base: 'Diseño de piezas con la imagen del negocio; la impresión corre por cuenta del cliente.' },
+  { id: 'micro-asesoria-hora', categoria: 'micro', nombre: 'Hora de asesoría',
+    unidad: 'hora', precio: 1500, horas: 1,
+    resumen: 'Una hora de asesoría directa para resolver una duda concreta: un trámite, un precio, una decisión o un documento, con las respuestas por escrito después.',
+    pasos: [
+      'El cliente plantea su duda concreta antes de la sesión.',
+      'Sesión de una hora: respuestas directas y pasos recomendados.',
+      'Resumen por escrito con las respuestas y los pasos siguientes.'
+    ],
+    entregables: ['Sesión de asesoría de una hora', 'Resumen por escrito con pasos siguientes'],
+    base: 'Asesoría directa sobre la pregunta del cliente; lo que no se sabe se dice y se marca para verificar.' },
+  { id: 'asistencia-legal', categoria: 'legal', nombre: 'Asistencia legal para el negocio',
+    unidad: 'servicio', precio: 12000, horas: 10,
+    resumen: 'Apoyo legal dentro del paquete de consultoría: revisión de contratos, consultas sobre obligaciones y orientación ante trámites, con un abogado aliado.',
+    pasos: [
+      'Levantamiento de la necesidad legal: contratos, trámites u obligaciones en duda.',
+      'Revisión de los documentos por el abogado aliado.',
+      'Informe de orientación con las respuestas y los pasos recomendados, en lenguaje claro.',
+      'Acompañamiento en el trámite o la firma, cuando aplica.'
+    ],
+    entregables: ['Documentos revisados por el abogado aliado', 'Informe de orientación legal en lenguaje claro', 'Acompañamiento en el trámite cuando aplica'],
+    base: '[A COMPLETAR: base normativa]' },
+  { id: 'proteccion-marca', categoria: 'legal', nombre: 'Protección y registro de marca',
+    unidad: 'trámite', precio: 10000, horas: 8,
+    resumen: 'Trámite para proteger la marca del negocio: búsqueda de que no esté en uso, preparación de la solicitud de registro y seguimiento hasta su resolución.',
+    pasos: [
+      'Búsqueda previa: comprobar que la marca no esté registrada ni en uso por otro negocio.',
+      'Preparación de la solicitud de registro con los datos y la imagen de la marca.',
+      'Presentación y seguimiento del trámite ante la entidad competente.',
+      'Entrega del registro y explicación de cómo defender la marca.'
+    ],
+    entregables: ['Búsqueda previa de la marca', 'Solicitud de registro presentada y seguida', 'Registro entregado con guía de defensa'],
+    base: '[A COMPLETAR: base normativa]' },
+  { id: 'fondos-cooperacion', categoria: 'finanzas', nombre: 'Solicitud de fondos de cooperación internacional',
+    unidad: 'expediente', precio: 20000, horas: 18,
+    resumen: 'Expediente para solicitar fondos de cooperación internacional para un proyecto: identificación de la convocatoria, propuesta escrita y presentación con seguimiento.',
+    pasos: [
+      'Identificación de las convocatorias abiertas que encajan con el proyecto.',
+      'Revisión de los requisitos de la convocatoria y de lo que el proyecto debe demostrar.',
+      'Redacción de la propuesta: objetivos, resultados, presupuesto y sostenibilidad, en el formato que pide la convocatoria.',
+      'Presentación de la solicitud y seguimiento de los requerimientos hasta su resolución.'
+    ],
+    entregables: ['Mapa de convocatorias que encajan con el proyecto', 'Propuesta escrita en el formato pedido', 'Solicitud presentada con seguimiento'],
+    base: 'Decreto 174/2026, art. 43.1: la cooperación internacional es una de las 14 fuentes de financiamiento de los PDL. [A COMPLETAR: convocatorias y requisitos de cada fondo].' },
+  { id: 'networking-b2b', categoria: 'eventos', nombre: 'Contactos, proveedores y ruedas de negocios',
+    unidad: 'servicio', precio: 12000, horas: 10,
+    resumen: 'Conexión del negocio con lo que necesita: búsqueda de proveedores, agenda de contactos y ruedas de negocios con otras empresas del territorio o del sector.',
+    pasos: [
+      'Levantamiento de lo que el negocio necesita: proveedores, clientes o aliados.',
+      'Búsqueda y verificación de contactos en el territorio y en la red de clientes.',
+      'Organización de reuniones entre empresas (B2B): agenda, presentación y seguimiento.',
+      'Informe de contactos con resultados y pasos siguientes.'
+    ],
+    entregables: ['Lista de contactos verificados', 'Reuniones B2B organizadas', 'Informe de resultados y pasos siguientes'],
+    base: 'Método de red de contactos: búsqueda, verificación, reunión y seguimiento. Los datos de otros negocios solo se comparten con su permiso.' },
+  { id: 'est-satisfaccion', categoria: 'estudios', nombre: 'Estudio de satisfacción de clientes',
+    unidad: 'estudio', precio: 12000, horas: 10,
+    resumen: 'Encuesta a los clientes del negocio para saber qué les gusta, qué les molesta y qué cambiarían, con resultados claros y un plan de mejora.',
+    pasos: [
+      'Diseño de la encuesta: preguntas cortas sobre el producto, el precio, la atención y la experiencia.',
+      'Aplicación de la encuesta a los clientes, en persona o en línea.',
+      'Procesamiento de respuestas y cálculo de resultados.',
+      'Informe con hallazgos y plan de mejora ordenado por importancia.'
+    ],
+    entregables: ['Encuesta diseñada y aplicada', 'Informe de satisfacción con resultados', 'Plan de mejora ordenado por importancia'],
+    base: 'Método de encuesta: cuestionario corto, clientes reales y resultados con cifras.' },
+  { id: 'analisis-competidores', categoria: 'estudios', nombre: 'Análisis de competidores',
+    unidad: 'análisis', precio: 10000, horas: 8,
+    resumen: 'Radiografía de los rivales directos: qué venden, a qué precio, cómo atienden y dónde están sus huecos, para que el negocio sepa dónde ganarles.',
+    pasos: [
+      'Identificación de los competidores directos e indirectos del territorio.',
+      'Levantamiento de su oferta, precios, canales y atención, con observación directa.',
+      'Comparación con el negocio del cliente: ventajas, desventajas y huecos del mercado.',
+      'Informe con recomendaciones para diferenciarse.'
+    ],
+    entregables: ['Mapa de competidores con oferta y precios', 'Cuadro de comparación con el negocio', 'Recomendaciones para diferenciarse'],
+    base: 'Observación directa de la oferta local y datos de la ONEI y de la Estrategia de Desarrollo Municipal.' },
+  { id: 'benchmarking', categoria: 'estudios', nombre: 'Comparación con los mejores del sector (benchmarking)',
+    unidad: 'análisis', precio: 14000, horas: 12,
+    resumen: 'Comparación del negocio con los mejores de su sector: qué hacen distinto, qué prácticas se pueden copiar y qué metas ponerse para alcanzarlos.',
+    pasos: [
+      'Selección de los negocios de referencia: los mejores del sector en el territorio o en el país.',
+      'Levantamiento de sus prácticas: oferta, precios, atención, canales y organización.',
+      'Comparación práctica por práctica con el negocio del cliente.',
+      'Plan de mejora con las prácticas a adoptar, en orden de impacto y esfuerzo.'
+    ],
+    entregables: ['Informe de comparación con los mejores', 'Cuadro de prácticas comparadas', 'Plan de mejora con prácticas a adoptar'],
+    base: 'Método de comparación de prácticas: referencias reales, comparación ordenada y plan de mejora.' },
+  { id: 'dictamen-financiero', categoria: 'finanzas', nombre: 'Dictamen financiero',
+    unidad: 'dictamen', precio: 18000, horas: 16,
+    resumen: 'Opinión formal sobre los estados financieros del negocio: si las cifras son correctas, qué riesgos muestran y qué corregir, firmada por quien la norma autoriza.',
+    pasos: [
+      'Recogida de los estados financieros y de los registros del negocio.',
+      'Revisión de cifras, registros y soportes, partida por partida.',
+      'Identificación de errores, riesgos y diferencias con la norma.',
+      'Redacción del dictamen con la opinión, los hallazgos y las correcciones recomendadas.',
+      'Entrega y explicación de los resultados al cliente.'
+    ],
+    entregables: ['Dictamen financiero firmado', 'Informe de hallazgos y riesgos', 'Lista de correcciones recomendadas'],
+    base: 'Normas contables empresariales; [A COMPLETAR: norma y firma autorizada del dictamen].' },
+  { id: 'asesoria-impuestos', categoria: 'finanzas', nombre: 'Asesoría de impuestos continua (mensual)',
+    unidad: 'mes', precio: 6000, horas: 6,
+    resumen: 'Acompañamiento mes a mes en los impuestos: declaraciones revisadas, pagos a tiempo, cambios de norma explicados y dudas resueltas, para no pagar de más ni llegar tarde.',
+    pasos: [
+      'Revisión mensual de las declaraciones y los pagos antes de su vencimiento.',
+      'Alerta de cambios en la norma que afecten al negocio, explicados en lenguaje claro.',
+      'Respuesta a las dudas del mes y orientación sobre decisiones con efecto tributario.',
+      'Resumen mensual: qué se pagó, qué falta y qué vigilar el mes siguiente.'
+    ],
+    entregables: ['Declaraciones y pagos revisados cada mes', 'Alertas de cambios de norma explicadas', 'Resumen mensual de la situación tributaria'],
+    base: 'Ley 181/2025 y normativa de la ONAT.' },
+  { id: 'asesoria-financiera', categoria: 'finanzas', nombre: 'Asesoría financiera continua (mensual)',
+    unidad: 'mes', precio: 8000, horas: 8,
+    resumen: 'Acompañamiento mes a mes en las finanzas del negocio: revisión de resultados, alertas tempranas y orientación para decidir, con los números reales del negocio.',
+    pasos: [
+      'Revisión mensual de ingresos, costos, resultados y flujo de caja con los números reales.',
+      'Alertas tempranas: desvíos, riesgos y oportunidades del mes.',
+      'Orientación para las decisiones del mes: precios, compras, gastos y financiamiento.',
+      'Resumen mensual con cifras, hallazgos y recomendaciones.'
+    ],
+    entregables: ['Revisión financiera mensual', 'Alertas y recomendaciones del mes', 'Resumen mensual con cifras'],
+    base: 'Guías metodológicas del MEP (Resolución 70/2026); parámetros BCC y ONAT vigentes.' },
+  { id: 'contab-continua', categoria: 'finanzas', nombre: 'Contabilidad continua (mensual)',
+    unidad: 'mes', precio: 10000, horas: 10,
+    resumen: 'La contabilidad del negocio llevada mes a mes en la aplicación Finanzas: registros al día, conciliación bancaria, cierre mensual y reportes listos para decidir.',
+    pasos: [
+      'Registro mensual de movimientos: ventas, compras, gastos y bancos.',
+      'Conciliación bancaria y revisión de saldos cada mes.',
+      'Cierre mensual con sus reportes: resultados, flujo y situación del negocio.',
+      'Entrega de los reportes y explicación de lo que muestran, en lenguaje claro.'
+    ],
+    entregables: ['Contabilidad al día en la aplicación Finanzas', 'Cierre mensual con conciliación bancaria', 'Reportes mensuales explicados'],
+    base: 'Normas contables empresariales; Resolución 202/2026 MFP cuando aplica a PDL.' },
+  { id: 'riesgo-penal', categoria: 'legal', nombre: 'Prevención de riesgos y delitos en la empresa',
+    unidad: 'servicio', precio: 15000, horas: 12,
+    resumen: 'Diagnóstico de los riesgos de tipo penal de la empresa: qué puede salir mal, qué responsabilidad tienen los socios y administradores, y qué medidas tomar para prevenirlo.',
+    pasos: [
+      'Levantamiento de las actividades y decisiones de riesgo de la empresa.',
+      'Identificación de los riesgos y de la responsabilidad de socios y administradores.',
+      'Medidas de prevención: controles, registros y reglas internas recomendadas.',
+      'Guía de prevención para el equipo, en lenguaje claro, con los pasos a seguir ante un problema.'
+    ],
+    entregables: ['Informe de riesgos identificados', 'Medidas de prevención recomendadas', 'Guía de prevención para el equipo'],
+    base: '[A COMPLETAR: base normativa]' },
+  { id: 'crea-colectivo-av', categoria: 'formaliza', nombre: 'Creación de colectivo de creación audiovisual',
+    unidad: 'trámite', precio: 15000, horas: 14,
+    resumen: 'Trámites completos para constituir un colectivo de creación audiovisual: forma, estatutos, inscripción y puesta en marcha, con el expediente ordenado.',
+    pasos: [
+      'Definición de la forma del colectivo, sus integrantes y su objeto.',
+      'Redacción de los estatutos y del reglamento interno.',
+      'Gestión de la aprobación y de la inscripción en los registros correspondientes.',
+      'Régimen tributario y contable explicado a los integrantes.',
+      'Entrega de la carpeta completa y orientación para la puesta en marcha.'
+    ],
+    entregables: ['Estatutos y reglamento interno', 'Expediente de constitución gestionado', 'Carpeta de puesta en marcha con guía de obligaciones'],
+    base: '[A COMPLETAR: base normativa]' },
+  { id: 'video-negocio', categoria: 'marca', nombre: 'Video y piezas audiovisuales para el negocio',
+    unidad: 'pieza', precio: 18000, horas: 16,
+    resumen: 'Video profesional para el negocio: presentación, producto o testimonio, grabado y editado, con versiones cortas para redes y para compartir por WhatsApp.',
+    pasos: [
+      'Definición del mensaje y del formato: presentación del negocio, producto o historia de cliente.',
+      'Guion sencillo y plan de grabación.',
+      'Grabación y edición del video principal.',
+      'Versiones cortas para redes y WhatsApp, con textos y portada.',
+      'Entrega de los archivos y guía de publicación.'
+    ],
+    entregables: ['Video principal editado', 'Versiones cortas para redes y WhatsApp', 'Guía de publicación'],
+    base: 'Producción audiovisual propia: guion, grabación, edición y versiones para redes.' },
+  { id: 'estrategia-comercial', categoria: 'gestion', nombre: 'Estrategia comercial',
+    unidad: 'proyecto', precio: 16000, horas: 14,
+    resumen: 'Estrategia para vender más: clientes objetivo, canales, precios, metas de venta y plan de acción, construida sobre los números reales del negocio.',
+    pasos: [
+      'Definición de clientes objetivo y de la propuesta de valor.',
+      'Canales de venta: dónde vender y cómo llegar a cada cliente.',
+      'Estrategia de precios desde la ficha de costo y la comparación con el mercado.',
+      'Metas de venta por mes y plan de acción con responsables.',
+      'Indicadores de seguimiento para saber si la estrategia funciona.'
+    ],
+    entregables: ['Documento de estrategia comercial', 'Metas de venta y plan de acción', 'Indicadores de seguimiento'],
+    base: 'Método del consultor: clientes, canales, precios y metas de venta, con la ficha de costo como base.' }
 ];
 
 /* ---------- Textos del informe ---------- */

@@ -21,7 +21,7 @@ lenguaje claro, cada dato una sola vez, documento formal imprimible,
 
 - `index.html` — estructura y pestañas (Ficha / Factura / Informe).
 - `estilos.css` — diseño completo + impresión (solo el documento activo).
-- `datos.js` — catálogo de 23 servicios, textos del informe y cálculos
+- `datos.js` — catálogo de 54 servicios, textos del informe y cálculos
   puros (exporta por CommonJS para pruebas en Node).
 - `app.js` — estado único, pantalla, documentos y guardado local.
 - `login.js` — acceso local, réplica del login de FactiCuba-Datos
@@ -62,6 +62,25 @@ lenguaje claro, cada dato una sola vez, documento formal imprimible,
   servicio «Estrategia de desarrollo» ahora describe sus 11
   pasos siguiendo los 11 acápites oficiales de la EDM.
   `datos.js` ?v=4, `app.js` ?v=3.
+- 2026-11-15 (noche): integración del catálogo aprobada por
+  Leonardo («apruebo todo tal cual», 21:54 CST), a partir del
+  estudio de la competencia (Auge y Quota). Se añadieron 31
+  servicios nuevos y mejoras en 8 de los 23 actuales (5 pasos
+  y 7 entregables añadidos, sin cambiar ningún nombre, precio
+  ni horas), más 4 categorías nuevas (marca y comunicación,
+  eventos y contactos, micro-servicios y apoyo legal). Total:
+  54 servicios en 9 categorías, idénticos en `datos.js` y en
+  el catálogo del sitio web (`servicios.js`). Los 7 servicios
+  marcados REQUIERE DECISIÓN en el borrador quedaron incluidos
+  tal cual por la aprobación; los aliados y verificaciones
+  pendientes (legal, marcas, eventos, fondos, dictamen,
+  comercio exterior, riesgo penal) siguen a cargo de Leonardo.
+  Los 5 productos-documento aprobados como oferta (4 con precio
+  y 1 gratis) NO se añadieron al catálogo: su contenido aún no
+  está escrito. Los términos de pago (50/50) no se cambiaron.
+  `datos.js` subió a ?v=5 para forzar la copia fresca.
+  Validado con Node: sintaxis, 54 servicios, ids únicos, toda
+  categoría usada existe y los 23 originales intactos.
 - Reglas del proyecto: todo en español; importes en CUP; nada se
   publica sin la autorización expresa de Leonardo; GitHub es la
   fuente de verdad (leer la versión en GitHub antes de publicar);
