@@ -2,6 +2,11 @@
    Ficha de Costo · Consultoría — datos y lógica pura (sin acceso al DOM).
    Catálogo de servicios de consultoría y creación de negocios en Cuba:
    TCP, MIPYME, PDL y demás actores económicos (Decreto 174/2026).
+   Marco normativo vigente citado en las bases: Decreto 174/2026,
+   Resolución 70/2026 del MEP (guías metodológicas), Resolución
+   202/2026 del MFP, Resolución 118/2026 del BCC, Ley 148/2022 y
+   Ley 181/2025. El Decreto 33/2021 y la Resolución 29/2021
+   quedaron derogados (Gaceta Oficial No. 87 de 2026) y no se citan.
    Los precios son BASES EDITABLES: ajústelos a sus tarifas reales.
    Se puede probar en Node: este archivo exporta por CommonJS si existe
    `module`, y en el navegador expone las mismas variables globales.
@@ -47,7 +52,7 @@ const SERVICIOS = [
       'Dictamen final y recomendaciones: factible, factible con condiciones o no factible, con el plan concreto de qué cambiar.'
     ],
     entregables: ['Documento del estudio en 7 capítulos, listo para presentar', 'Dictamen de viabilidad con indicadores VAN, TIR, PRI y B/C', 'Plan de mejora con los cambios exactos si el resultado no es favorable'],
-    base: 'Decreto 174/2026, Resolución Conjunta 1/2022 MINCEX-MEP y Decreto 327/2014; metodología del MEP.' },
+    base: 'Decreto 174/2026; Resolución 70/2026 del MEP (guías metodológicas vigentes); Resolución Conjunta 1/2022 MINCEX-MEP; Decreto 327/2014.' },
   { id: 'exp-pdl', categoria: 'estudios', nombre: 'Expediente de Proyecto de Desarrollo Local (PDL)',
     unidad: 'proyecto', precio: 38000, horas: 32,
     resumen: 'Expediente oficial completo del PDL, con sus 16 secciones y la Ficha Única, armado para su aprobación por el Consejo de la Administración Municipal.',
@@ -190,7 +195,7 @@ const SERVICIOS = [
       'Revisión conjunta y entrega del modelo editable con su guía de uso.'
     ],
     entregables: ['Proyección financiera a 5 años', 'Estado de resultados y flujo de caja', 'Modelo editable con supuestos declarados'],
-    base: 'Metodología MEP, capítulos 5 y 6; parámetros BCC y ONAT vigentes.' },
+    base: 'Guías metodológicas del MEP (Resolución 70/2026), capítulos 5 y 6; parámetros BCC y ONAT vigentes.' },
   { id: 'credito', categoria: 'finanzas', nombre: 'Expediente de crédito bancario (BANDEC / BPA)',
     unidad: 'expediente', precio: 14000, horas: 14,
     resumen: 'Expediente de crédito armado como lo pide el banco: capacidad de pago, garantías, flujo y documentación, sin devoluciones por vacíos.',
@@ -202,7 +207,7 @@ const SERVICIOS = [
       'Acompañamiento en la presentación y respuesta a los requerimientos del banco.'
     ],
     entregables: ['Expediente de crédito completo', 'Análisis de capacidad de pago (DSCR, B/C)', 'Acompañamiento en la presentación'],
-    base: 'Requisitos del sistema bancario nacional (BANDEC, BPA, Banco Metropolitano) y del BCC.' },
+    base: 'Requisitos del sistema bancario nacional (BANDEC, BPA, Banco Metropolitano) y del BCC; Resolución 118/2026 del BCC cuando aplica a PDL.' },
   { id: 'contab-inicial', categoria: 'finanzas', nombre: 'Contabilidad inicial y puesta en marcha en Finanzas',
     unidad: 'servicio', precio: 12000, horas: 12,
     resumen: 'Contabilidad lista desde el primer día: plan de cuentas, registros, bancos y reportes, configurada en la aplicación Finanzas.',
@@ -225,7 +230,7 @@ const SERVICIOS = [
       'Recomendaciones de decisión según la resistencia del proyecto.'
     ],
     entregables: ['Análisis de sensibilidad en tres escenarios', 'Matriz de riesgos con mitigación', 'Recomendaciones de decisión'],
-    base: 'Metodología MEP, capítulo 6; variaciones habituales del contexto cubano.' },
+    base: 'Guías metodológicas del MEP (Resolución 70/2026), capítulo 6; variaciones habituales del contexto cubano.' },
   { id: 'estrategia', categoria: 'gestion', nombre: 'Estrategia de desarrollo y plan de acción anual',
     unidad: 'proyecto', precio: 20000, horas: 18,
     resumen: 'Estrategia del negocio o del territorio con líneas, programas, metas e indicadores, lista para ejecutar y evaluar.',
@@ -237,7 +242,7 @@ const SERVICIOS = [
       'Mecanismo de evaluación y actualización de la estrategia.'
     ],
     entregables: ['Documento de estrategia', 'Plan de acción anual con presupuesto', 'Tablero de indicadores y evaluación'],
-    base: 'Decreto 174/2026, capítulos de estrategias de desarrollo territorial.' },
+    base: 'Decreto 174/2026 y Resolución 70/2026 del MEP (guías metodológicas para las estrategias de desarrollo municipal).' },
   { id: 'eval-semestral', categoria: 'gestion', nombre: 'Evaluación semestral de PDL ante el CAM',
     unidad: 'evaluación', precio: 12000, horas: 10,
     resumen: 'Evaluación semestral del PDL lista para el Consejo de la Administración Municipal: ejecución, fuentes, resultados y ajustes.',
@@ -308,7 +313,7 @@ const SERVICIOS = [
 
 /* ---------- Textos del informe ---------- */
 const PORQUE = [
-  'Método probado: cada estudio sigue la metodología del MEP y la normativa vigente, con datos reales del territorio y fuentes citadas. Nada se inventa.',
+  'Método probado: cada estudio sigue las guías metodológicas vigentes del MEP (Resolución 70/2026) y la normativa vigente, con datos reales del territorio y fuentes citadas. Nada se inventa.',
   'Documentos que se aprueban: los expedientes se arman como los piden el CAM y el banco, para no perder tiempo en devoluciones por vacíos.',
   'Lenguaje claro: usted entiende todo lo que se hace y puede explicarlo con sus palabras. Si no puede explicarlo, el trabajo no está terminado.',
   'Acompañamiento real: no entregamos un papel y nos vamos; defendemos el proyecto con usted y seguimos hasta la aprobación.',

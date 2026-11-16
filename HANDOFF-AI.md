@@ -42,6 +42,15 @@ lenguaje claro, cada dato una sola vez, documento formal imprimible,
   botones Salir y Contraseña en el encabezado. La contraseña no está
   escrita en el código: vive solo en cada equipo, igual que en las
   demás páginas.
+- 2026-11-15 (noche): bases normativas actualizadas al marco
+  vigente por orden de Leonardo («usa la ley más nueva», la misma
+  orden que para la plantilla Plan EDM). La página ya citaba el
+  Decreto 174/2026 y no tenía citas derogadas; el cambio nombra
+  la Resolución 70/2026 del MEP (guías metodológicas vigentes)
+  en 4 bases y en un texto del informe, y añade la Resolución
+  118/2026 del BCC (cuando aplica a PDL) a la base del
+  expediente de crédito. Precios, pasos y entregables intactos.
+  `datos.js` subió a ?v=3 para forzar la copia fresca.
 - Reglas del proyecto: todo en español; importes en CUP; nada se
   publica sin la autorización expresa de Leonardo; GitHub es la
   fuente de verdad (leer la versión en GitHub antes de publicar);
