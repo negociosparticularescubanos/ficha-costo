@@ -51,6 +51,17 @@ lenguaje claro, cada dato una sola vez, documento formal imprimible,
   118/2026 del BCC (cuando aplica a PDL) a la base del
   expediente de crédito. Precios, pasos y entregables intactos.
   `datos.js` subió a ?v=3 para forzar la copia fresca.
+- 2026-11-15 (noche): alineación con los acápites de la EDM,
+  aprobada por Leonardo. El encargo declara (opcional) la línea
+  estratégica y el programa de la EDM a los que responde
+  (listas semilla de Ciénaga de Zapata 2026-2030 en `datos.js`:
+  LINEAS_EDM 6, PROGRAMAS_EDM 9, tomadas de los acápites 5 y 6;
+  para otro municipio se cambian ahí). La alineación aparece en
+  la ficha impresa, en la factura y en una sección del informe;
+  si no se elige, no aparece ni se marca como pendiente. El
+  servicio «Estrategia de desarrollo» ahora describe sus 11
+  pasos siguiendo los 11 acápites oficiales de la EDM.
+  `datos.js` ?v=4, `app.js` ?v=3.
 - Reglas del proyecto: todo en español; importes en CUP; nada se
   publica sin la autorización expresa de Leonardo; GitHub es la
   fuente de verdad (leer la versión en GitHub antes de publicar);

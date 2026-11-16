@@ -17,6 +17,7 @@ function estadoInicial() {
   return {
     emisorNombre: 'FRANWE S.U.R.L.', emisorDetalle: '',
     clienteNombre: '', actor: '', clienteContacto: '', proyecto: '',
+    lineaEdm: '', programaEdm: '',
     numero: 'FC-' + new Date().getFullYear() + '-001', fecha: hoyISO(), validez: 30,
     lineas: [], gastos: [{ concepto: '', monto: '' }],
     costoHora: 350, indirectosPct: 15, descuento: 0,
@@ -204,6 +205,8 @@ function enlazar(id, clave, esNumero) {
 ['emisorNombre', 'emisorDetalle', 'clienteNombre', 'clienteContacto', 'proyecto', 'numero', 'fecha', 'formaPago', 'notasFactura'].forEach(function (id) { enlazar(id, id); });
 ['validez', 'costoHora', 'indirectosPct', 'descuento'].forEach(function (id) { enlazar(id, id, true); });
 $('clienteActor').addEventListener('change', function (e) { estado.actor = e.target.value; recalcular(); });
+$('lineaEdm').addEventListener('change', function (e) { estado.lineaEdm = e.target.value; recalcular(); });
+$('programaEdm').addEventListener('change', function (e) { estado.programaEdm = e.target.value; recalcular(); });
 $('notaFinal').addEventListener('input', function (e) { estado.notaFinal = e.target.value; recalcular(); });
 function pintarCampos() {
   $('emisorNombre').value = estado.emisorNombre;
@@ -225,6 +228,14 @@ function pintarCampos() {
   sel.innerHTML = '<option value="">Seleccione…</option>' + D.ACTORES.map(function (a) {
     return '<option value="' + esc(a.id) + '"' + (estado.actor === a.id ? ' selected' : '') + '>' + esc(a.nombre) + '</option>';
   }).join('');
+  const selL = $('lineaEdm');
+  selL.innerHTML = '<option value="">Sin alineación</option>' + D.LINEAS_EDM.map(function (l) {
+    return '<option value="' + esc(l.id) + '"' + (estado.lineaEdm === l.id ? ' selected' : '') + '>' + esc(l.nombre) + '</option>';
+  }).join('');
+  const selP = $('programaEdm');
+  selP.innerHTML = '<option value="">Sin programa</option>' + D.PROGRAMAS_EDM.map(function (p) {
+    return '<option value="' + esc(p.id) + '"' + (estado.programaEdm === p.id ? ' selected' : '') + '>' + esc(p.nombre) + '</option>';
+  }).join('');
 }
 
 /* ---------- Recálculo + documentos ---------- */
@@ -232,6 +243,13 @@ function lineasConServicio(totales) {
   return totales.lineas.map(function (l) {
     return { linea: l, servicio: l.servicioId ? D.servicioPorId(l.servicioId) : null };
   });
+}
+/* Alineación del encargo con la EDM: línea y/o programa, o cadena vacía
+   si no se eligió ninguna (la alineación es opcional y no se marca
+   como pendiente: no todo encargo responde a una línea estratégica). */
+function textoAlineacion() {
+  const partes = [D.lineaEdmNombre(estado.lineaEdm), D.programaEdmNombre(estado.programaEdm)].filter(function (x) { return x; });
+  return partes.join(' · ');
 }
 function renderFactura(totales) {
   const cliente = estado.clienteNombre.trim() ? esc(estado.clienteNombre.trim()) : falta('nombre del cliente');
@@ -250,7 +268,7 @@ function renderFactura(totales) {
     + '<p>Consultoría y creación de negocios · Cuba</p></div>'
     + '<div class="doc-titulo"><h2>Factura</h2><p>Nº ' + (estado.numero.trim() ? esc(estado.numero.trim()) : falta('número')) + '</p><p>Fecha: ' + esc(fechaLarga(estado.fecha) || '—') + '</p><p>Validez: ' + esc(D.num(estado.validez) || 30) + ' días</p></div></div>'
     + '<div class="doc-dos-col"><div class="doc-bloque"><h4>Facturar a</h4><p><strong>' + cliente + '</strong></p><p>' + actor + '</p>' + (estado.clienteContacto.trim() ? '<p>' + esc(estado.clienteContacto.trim()) + '</p>' : '') + '</div>'
-    + '<div class="doc-bloque"><h4>Proyecto</h4><p>' + (estado.proyecto.trim() ? esc(estado.proyecto.trim()) : falta('nombre del proyecto')) + '</p><p>Forma de pago: ' + esc(estado.formaPago.trim() || 'A convenir') + '</p></div></div>'
+    + '<div class="doc-bloque"><h4>Proyecto</h4><p>' + (estado.proyecto.trim() ? esc(estado.proyecto.trim()) : falta('nombre del proyecto')) + '</p>' + (textoAlineacion() ? '<p>' + esc(textoAlineacion()) + '</p>' : '') + '<p>Forma de pago: ' + esc(estado.formaPago.trim() || 'A convenir') + '</p></div></div>'
     + '<table class="doc-tabla"><thead><tr><th style="width:34px">#</th><th>Descripción</th><th class="num" style="width:56px">Cant.</th><th class="num" style="width:110px">Precio unit.</th><th class="num" style="width:120px">Importe (CUP)</th></tr></thead><tbody>'
     + (filas || '<tr><td colspan="5">Sin servicios. Añada servicios en la pestaña «Ficha de costo».</td></tr>') + filasG + '</tbody></table>'
     + '<table class="doc-tabla" style="max-width:340px;margin-left:auto"><tbody>'
@@ -291,6 +309,7 @@ function renderInforme(totales) {
     + '<p>Cliente: <strong>' + cliente + '</strong> · ' + actor + '</p>'
     + '<p>Fecha: ' + esc(fechaLarga(estado.fecha) || '—') + ' · Propuesta Nº ' + (estado.numero.trim() ? esc(estado.numero.trim()) : falta('número')) + ' · Validez: ' + esc(D.num(estado.validez) || 30) + ' días</p></div>'
     + '<div class="inf-sec"><h3>Resumen ejecutivo</h3><p>' + esc(D.textoResumenEjecutivo(estado, totales)) + '</p></div>'
+    + (textoAlineacion() ? '<div class="inf-sec"><h3>Alineación con la Estrategia de Desarrollo Municipal</h3><p>Este encargo responde a la Estrategia de Desarrollo Municipal 2026-2030 (' + esc(textoAlineacion()) + '). Los servicios contratados se diseñan y se presentan en ese marco, para que el proyecto encaje en las prioridades del municipio y en su evaluación ante el CAM.</p></div>' : '')
     + '<div class="inf-sec"><h3>Qué incluye el encargo, servicio por servicio</h3>'
     + (bloques || '<p>Añada servicios en la pestaña «Ficha de costo» para generar esta sección.</p>') + '</div>'
     + '<div class="inf-sec"><h3>Inversión total</h3>'
@@ -317,6 +336,7 @@ function buildPrintFicha(totales) {
     '<div class="doc-head"><div class="emisor"><h3>' + esc(estado.emisorNombre.trim() || 'Emisor') + '</h3><p>Consultoría y creación de negocios · Cuba</p></div>'
     + '<div class="doc-titulo"><h2>Ficha de costo</h2><p>Nº ' + (estado.numero.trim() ? esc(estado.numero.trim()) : falta('número')) + '</p><p>Fecha: ' + esc(fechaLarga(estado.fecha) || '—') + '</p></div></div>'
     + '<p>Cliente: <strong>' + (estado.clienteNombre.trim() ? esc(estado.clienteNombre.trim()) : falta('nombre del cliente')) + '</strong> · Proyecto: ' + (estado.proyecto.trim() ? esc(estado.proyecto.trim()) : falta('nombre del proyecto')) + '</p>'
+    + (textoAlineacion() ? '<p>Alineación EDM: ' + esc(textoAlineacion()) + '</p>' : '')
     + '<table class="doc-tabla"><thead><tr><th>#</th><th>Servicio</th><th class="num">Cant.</th><th class="num">Precio unit.</th><th class="num">Importe (CUP)</th><th class="num">Horas</th></tr></thead><tbody>' + (filas || '<tr><td colspan="6">Sin servicios.</td></tr>') + '</tbody></table>'
     + (filasG ? '<table class="doc-tabla"><thead><tr><th>Gasto directo</th><th class="num">Monto (CUP)</th></tr></thead><tbody>' + filasG + '</tbody></table>' : '')
     + '<table class="doc-tabla" style="max-width:360px;margin-left:auto"><tbody>'

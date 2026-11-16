@@ -34,6 +34,30 @@ const CATEGORIAS = [
   { id: 'digital', nombre: 'Soluciones digitales' }
 ];
 
+/* ---------- Líneas y programas de la EDM (semilla: Ciénaga de Zapata
+   2026-2030, tomada de los acápites 5 y 6 de la Estrategia). El encargo
+   declara a qué línea y programa responde; el informe muestra la
+   alineación. Para otro municipio, estas listas se cambian aquí. ---------- */
+const LINEAS_EDM = [
+  { id: 'l1', nombre: 'Línea 1 · Producción de Alimentos' },
+  { id: 'l2', nombre: 'Línea 2 · Conservación y uso sostenible de la Biodiversidad' },
+  { id: 'l3', nombre: 'Línea 3 · Formación y gestión de capacidades para el desarrollo local' },
+  { id: 'l4', nombre: 'Línea 4 · Energía Renovable' },
+  { id: 'l5', nombre: 'Línea 5 · Exportaciones, cooperación internacional e inversión extranjera' },
+  { id: 'l6', nombre: 'Línea 6 · Bienestar y Hábitat' }
+];
+const PROGRAMAS_EDM = [
+  { id: 'p1', nombre: 'Educación Ambiental' },
+  { id: 'p2', nombre: 'Desarrollo de la Responsabilidad Social «Rafael María de Mendive»' },
+  { id: 'p3', nombre: 'Desarrollo de la Responsabilidad Social para el manejo de los desechos sólidos' },
+  { id: 'p4', nombre: 'Desarrollo de la Economía Social y Solidaria «Viva mi Barrio»' },
+  { id: 'p5', nombre: 'Desarrollo del Turismo Local Sostenible' },
+  { id: 'p6', nombre: 'Desarrollo de la producción de alimentos sanos' },
+  { id: 'p7', nombre: 'Desarrollo de fuentes renovables de energía' },
+  { id: 'p8', nombre: 'Manejo sostenible del APRM' },
+  { id: 'p9', nombre: 'Fomento de exportaciones, cooperación internacional e inversión extranjera' }
+];
+
 /* ---------- Catálogo de servicios ----------
    Cada servicio trae: resumen, pasos (qué se hace, en orden),
    entregables (qué recibe el cliente) y base (norma o método).
@@ -233,15 +257,21 @@ const SERVICIOS = [
     base: 'Guías metodológicas del MEP (Resolución 70/2026), capítulo 6; variaciones habituales del contexto cubano.' },
   { id: 'estrategia', categoria: 'gestion', nombre: 'Estrategia de desarrollo y plan de acción anual',
     unidad: 'proyecto', precio: 20000, horas: 18,
-    resumen: 'Estrategia del negocio o del territorio con líneas, programas, metas e indicadores, lista para ejecutar y evaluar.',
+    resumen: 'Estrategia de desarrollo municipal con los 11 acápites oficiales: datos del territorio, misión y visión, DAFO, líneas, programas, políticas por línea, seguimiento, ordenamiento ambiental y gobernanza, lista para ejecutar y evaluar.',
     pasos: [
-      'Diagnóstico: situación actual, potencialidades y brechas, con datos del territorio.',
-      'Definición de líneas estratégicas, programas y proyectos priorizados.',
-      'Metas e indicadores por programa, con responsables y cronograma.',
-      'Plan de acción anual con presupuesto por programa.',
-      'Mecanismo de evaluación y actualización de la estrategia.'
+      'Datos históricos, sociales y económicos: ubicación y territorio, historia y patrimonio, biodiversidad y categorías de protección, estructura político-administrativa y base económica.',
+      'Análisis estratégico: misión, visión y valores compartidos del municipio, construidos con los actores del territorio.',
+      'Matriz DAFO: debilidades, amenazas, fortalezas y oportunidades, con la participación de los actores locales.',
+      'Potenciales endógenos, barreras principales y conflictos identificados en el territorio.',
+      'Líneas estratégicas del período, priorizadas con el gobierno municipal.',
+      'Programas de la estrategia, con su alcance, sus responsables y su cartera de proyectos.',
+      'Políticas públicas locales por línea: objetivos, marco jurídico, lineamientos, metas por plazo, acciones, resultados esperados, responsables y control.',
+      'Ciclo de gestión, seguimiento y actualización: tablero de indicadores con línea base, metas intermedias y meta final, y evaluaciones anuales.',
+      'Articulación con el Modelo de Ordenamiento Ambiental: zonificación, usos compatibles con la conservación y Tarea Vida.',
+      'Participación y gobernanza: CAM, AMPP, consejos populares, entidades y población en la elaboración, implementación y evaluación.',
+      'Disposiciones finales: presentación al CAM, elevación a la AMPP y mecanismo de revisión permanente.'
     ],
-    entregables: ['Documento de estrategia', 'Plan de acción anual con presupuesto', 'Tablero de indicadores y evaluación'],
+    entregables: ['Documento de estrategia con los 11 acápites oficiales', 'Plan de acción anual con presupuesto', 'Tablero de indicadores y evaluación'],
     base: 'Decreto 174/2026 y Resolución 70/2026 del MEP (guías metodológicas para las estrategias de desarrollo municipal).' },
   { id: 'eval-semestral', categoria: 'gestion', nombre: 'Evaluación semestral de PDL ante el CAM',
     unidad: 'evaluación', precio: 12000, horas: 10,
@@ -383,6 +413,14 @@ function actorNombre(id) {
   for (let i = 0; i < ACTORES.length; i++) if (ACTORES[i].id === id) return ACTORES[i].nombre;
   return '';
 }
+function lineaEdmNombre(id) {
+  for (let i = 0; i < LINEAS_EDM.length; i++) if (LINEAS_EDM[i].id === id) return LINEAS_EDM[i].nombre;
+  return '';
+}
+function programaEdmNombre(id) {
+  for (let i = 0; i < PROGRAMAS_EDM.length; i++) if (PROGRAMAS_EDM[i].id === id) return PROGRAMAS_EDM[i].nombre;
+  return '';
+}
 /* Resumen ejecutivo del informe. Lo que falta queda marcado [A COMPLETAR],
    como manda la regla del redactor de FactiCuba: nunca se inventa. */
 function textoResumenEjecutivo(estado, totales) {
@@ -401,7 +439,7 @@ function textoResumenEjecutivo(estado, totales) {
 }
 
 /* ---------- Exportación ---------- */
-const API = { ACTORES: ACTORES, CATEGORIAS: CATEGORIAS, SERVICIOS: SERVICIOS, PORQUE: PORQUE, PASOS_SIGUIENTES: PASOS_SIGUIENTES, TERMINOS_DEFECTO: TERMINOS_DEFECTO, NOTA_FINAL_DEFECTO: NOTA_FINAL_DEFECTO, num: num, fmt: fmt, servicioPorId: servicioPorId, normalizar: normalizar, buscarServicios: buscarServicios, calcularFicha: calcularFicha, actorNombre: actorNombre, textoResumenEjecutivo: textoResumenEjecutivo };
+const API = { ACTORES: ACTORES, CATEGORIAS: CATEGORIAS, LINEAS_EDM: LINEAS_EDM, PROGRAMAS_EDM: PROGRAMAS_EDM, SERVICIOS: SERVICIOS, PORQUE: PORQUE, PASOS_SIGUIENTES: PASOS_SIGUIENTES, TERMINOS_DEFECTO: TERMINOS_DEFECTO, NOTA_FINAL_DEFECTO: NOTA_FINAL_DEFECTO, num: num, fmt: fmt, servicioPorId: servicioPorId, normalizar: normalizar, buscarServicios: buscarServicios, calcularFicha: calcularFicha, actorNombre: actorNombre, lineaEdmNombre: lineaEdmNombre, programaEdmNombre: programaEdmNombre, textoResumenEjecutivo: textoResumenEjecutivo };
 if (typeof module !== 'undefined' && module.exports) { module.exports = API; }
 raiz.FichaDatos = API;
 
