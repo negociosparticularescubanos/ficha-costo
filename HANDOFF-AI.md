@@ -24,6 +24,9 @@ lenguaje claro, cada dato una sola vez, documento formal imprimible,
 - `datos.js` — catálogo de 23 servicios, textos del informe y cálculos
   puros (exporta por CommonJS para pruebas en Node).
 - `app.js` — estado único, pantalla, documentos y guardado local.
+- `login.js` — acceso local, réplica del login de FactiCuba-Datos
+  (solo usuario admin; contraseña guardada en el equipo; sesión en
+  localStorage; cambio de contraseña en el equipo).
 - `README.md` — descripción, despliegue y cómo editar el catálogo.
 
 ## Estado
@@ -33,6 +36,12 @@ lenguaje claro, cada dato una sola vez, documento formal imprimible,
   `https://negociosparticularescubanos.github.io/ficha-costo/`.
   Catálogo de 23 servicios en 5 categorías, con pasos, entregables y
   base normativa. Precios base editables en CUP.
+- 2026-11-15 (noche): login añadido por orden de Leonardo, réplica
+  del de FactiCuba-Datos: solo usuario admin, contraseña guardada en
+  el equipo (la primera vez queda fijada), sesión en localStorage,
+  botones Salir y Contraseña en el encabezado. La contraseña no está
+  escrita en el código: vive solo en cada equipo, igual que en las
+  demás páginas.
 - Reglas del proyecto: todo en español; importes en CUP; nada se
   publica sin la autorización expresa de Leonardo; GitHub es la
   fuente de verdad (leer la versión en GitHub antes de publicar);

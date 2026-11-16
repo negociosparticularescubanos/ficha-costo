@@ -9,6 +9,24 @@
 <link rel="stylesheet" href="estilos.css">
 </head>
 <body>
+  <!-- LOGIN -->
+  <div id="loginView">
+    <div class="login-card">
+      <div class="biglogo">💼</div>
+      <span class="badge badge-gold">Consultoría · TCP · MIPYME · PDL</span>
+      <h2>Bienvenido a Ficha de Costo</h2>
+      <p>Ficha de costo, factura e informe para servicios de consultoría y creación de negocios. Sus datos se guardan en este equipo.</p>
+      <div class="field"><label>Usuario</label><input class="inp" id="loginUserInput" value="admin" autocomplete="username" readonly></div>
+      <div class="field"><label>Contraseña</label><input class="inp" id="loginPassInput" type="password" placeholder="••••••••" autocomplete="current-password"></div>
+      <div class="btn-row">
+        <button class="btn btn-gold" id="loginBtn" style="flex:1" type="button">🔓 Entrar como admin</button>
+      </div>
+      <p class="hint">La primera vez en este equipo, la contraseña que escriba quedará fijada en este equipo.</p>
+    </div>
+  </div>
+
+  <!-- APP -->
+  <div id="appView">
 <header class="masthead">
   <div class="masthead-in">
     <div>
@@ -19,6 +37,10 @@
     <div class="mast-actions">
       <button class="btn btn-ghost" id="btnNueva" type="button">Nueva ficha</button>
       <span class="note" style="color:#cbd5e1;align-self:center">Guardado automático en este equipo</span>
+    </div>
+    <div class="userchip" id="userChip" hidden>👤 <b id="userNameEl"></b>
+      <button class="btn btn-ghost btn-sm" id="btnClave" type="button">🔑 Contraseña</button>
+      <button class="btn btn-ghost btn-sm" id="logoutBtn" type="button">Salir</button>
     </div>
   </div>
 </header>
@@ -205,7 +227,30 @@
   </footer>
 </div>
 
+</div><!-- /appView -->
+
+  <!-- Aviso + cambio de contraseña -->
+  <div id="toast" role="status"></div>
+  <div id="claveModal" style="display:none">
+    <div class="modal-card">
+      <h3>🔑 Cambiar mi contraseña</h3>
+      <p>Solo para el usuario <b>admin</b> de este equipo. La nueva contraseña se guarda en este dispositivo.</p>
+      <label class="lbl" for="claveActual">Contraseña actual</label>
+      <input class="inp" id="claveActual" type="password" autocomplete="current-password">
+      <label class="lbl" for="claveNueva" style="margin-top:10px">Contraseña nueva</label>
+      <input class="inp" id="claveNueva" type="password" autocomplete="new-password">
+      <label class="lbl" for="claveRepite" style="margin-top:10px">Repetir la nueva</label>
+      <input class="inp" id="claveRepite" type="password" autocomplete="new-password">
+      <p id="claveError" class="clave-error"></p>
+      <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:12px">
+        <button class="btn btn-light btn-sm" id="claveCerrar" type="button">Cancelar</button>
+        <button class="btn btn-navy btn-sm" id="claveGuardar" type="button">Guardar nueva contraseña</button>
+      </div>
+    </div>
+  </div>
+
 <script src="datos.js"></script>
+<script src="login.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
