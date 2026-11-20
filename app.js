@@ -7,6 +7,58 @@
 'use strict';
 const D = window.FichaDatos;
 const LS_KEY = 'fichaCostoConsultoria.v1';
+/* ---------- Respaldo en la nube (Supabase) ----------
+   El catálogo sigue en datos.js; lo que viaja a la nube es el estado
+   de la ficha (respaldo por usuario, como el resto de las apps). */
+const SUPA_URL = 'https://uczlkdzvzbqgzzlhcmro.supabase.co';
+const SUPA_ANON = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVjemxrZHp2emJxZ3p6bGhjbXJvIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTUxMzU2ODAsImV4cCI6MjExMDcxMTY4MH0.3xwFjVbL-Usa9hohxU0u__alXH8ZsdsJhH5CWllkH1M';
+const SUPA_REST = SUPA_URL + '/rest/v1/fichas';
+let nubeOk = false;
+let nubeTimer = null;
+function nubeUsuario() {
+  try { return localStorage.getItem('fichacosto_session') || 'admin'; } catch (e) { return 'admin'; }
+}
+function nubePintar() {
+  const d = $('nubeDot'); const t = $('nubeTxt');
+  if (d) d.style.background = nubeOk ? '#22c55e' : '#ef4444';
+  if (t) t.textContent = nubeOk ? 'Nube: conectado' : 'Nube: sin conexión';
+}
+function nubeSalud() {
+  return fetch(SUPA_REST + '?select=id&limit=1', { headers: { apikey: SUPA_ANON, Authorization: 'Bearer ' + SUPA_ANON } })
+    .then(function (r) { nubeOk = r.ok; nubePintar(); })
+    .catch(function () { nubeOk = false; nubePintar(); });
+}
+function nubeProgramar() {
+  clearTimeout(nubeTimer);
+  nubeTimer = setTimeout(nubeEnviar, 2500);
+}
+function nubeEnviar() {
+  return fetch(SUPA_REST + '?on_conflict=usuario', {
+    method: 'POST',
+    headers: { apikey: SUPA_ANON, Authorization: 'Bearer ' + SUPA_ANON, 'Content-Type': 'application/json', Prefer: 'resolution=merge-duplicates,return=minimal' },
+    body: JSON.stringify({ usuario: nubeUsuario(), estado: estado, fecha_guardado: new Date().toISOString() })
+  }).then(function (r) { nubeOk = r.ok; nubePintar(); })
+    .catch(function () { nubeOk = false; nubePintar(); });
+}
+function nubeRestaurar() {
+  fetch(SUPA_REST + '?usuario=eq.' + encodeURIComponent(nubeUsuario()) + '&select=estado,fecha_guardado', { headers: { apikey: SUPA_ANON, Authorization: 'Bearer ' + SUPA_ANON } })
+    .then(function (r) { if (!r.ok) throw new Error('sin respuesta'); return r.json(); })
+    .then(function (filas) {
+      if (!filas || !filas.length || !filas[0].estado) { window.alert('Todavía no hay ningún respaldo en la nube para este usuario.'); return; }
+      const f = filas[0];
+      if (!window.confirm('Se restaurará la ficha guardada en la nube' + (f.fecha_guardado ? ' el ' + String(f.fecha_guardado).slice(0, 10) : '') + '. Lo que haya en este equipo se reemplazará. ¿Continuar?')) return;
+      const base = estadoInicial();
+      Object.keys(base).forEach(function (k) { if (f.estado[k] !== undefined) base[k] = f.estado[k]; });
+      if (!Array.isArray(base.lineas)) base.lineas = [];
+      if (!Array.isArray(base.gastos) || !base.gastos.length) base.gastos = [{ concepto: '', monto: '' }];
+      estado = base;
+      guardar();
+      pintarCampos(); pintarChips(); pintarCatalogo(); pintarLineas(); pintarGastos();
+      activarTab(estado.tab || 'ficha'); recalcular();
+      window.alert('✅ Ficha restaurada desde la nube.');
+    })
+    .catch(function () { window.alert('No se pudo leer la nube. Revisa la conexión e inténtalo de nuevo.'); });
+}
 const $ = function (id) { return document.getElementById(id); };
 
 function hoyISO() {
@@ -45,6 +97,7 @@ function guardar() {
   guardarTimer = setTimeout(function () {
     try { localStorage.setItem(LS_KEY, JSON.stringify(estado)); } catch (e) { /* sin almacenamiento: la app sigue */ }
   }, 250);
+  nubeProgramar();
 }
 function esc(s) {
   return String(s == null ? '' : s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -382,6 +435,10 @@ $('btnNueva').addEventListener('click', function () {
 });
 
 /* ---------- Inicio ---------- */
+const btnNube = $('btnNubeRestaurar');
+if (btnNube) btnNube.addEventListener('click', nubeRestaurar);
+nubeSalud();
+setInterval(nubeSalud, 120000);
 pintarCampos();
 pintarChips();
 pintarCatalogo();

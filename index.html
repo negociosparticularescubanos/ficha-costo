@@ -37,7 +37,8 @@
     </div>
     <div class="mast-actions">
       <button class="btn btn-ghost" id="btnNueva" type="button">Nueva ficha</button>
-      <span class="note" style="color:#cbd5e1;align-self:center">Guardado automático en este equipo</span>
+      <span class="note" style="color:#cbd5e1;align-self:center"><span id="nubeDot" style="display:inline-block;width:9px;height:9px;border-radius:50%;background:#ef4444;vertical-align:middle;margin-right:4px"></span><span id="nubeTxt">Nube: comprobando…</span></span>
+      <button class="btn btn-ghost btn-sm" id="btnNubeRestaurar" type="button">Restaurar de la nube</button>
     </div>
     <div class="userchip" id="userChip" hidden>👤 <b id="userNameEl"></b>
       <button class="btn btn-ghost btn-sm" id="btnClave" type="button">🔑 Contraseña</button>
@@ -260,6 +261,6 @@
 
 <script src="datos.js?v=5"></script>
 <script src="login.js?v=2"></script>
-<script src="app.js?v=3"></script>
+<script src="app.js?v=4"></script>
 </body>
 </html>
